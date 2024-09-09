@@ -8,18 +8,30 @@ if ($method == "OPTIONS") {
     die();
 }
 
-//TODO: controlador de clientes
+//TODO: controlador de clientes Tienda Cel@g
 
 require_once('../models/clientes.model.php');
 error_reporting(0);
 $clientes = new Clientes;
 
 switch ($_GET["op"]) {
-    //TODO: operaciones de clientes
-
+        //TODO: operaciones de clientes
+    case 'buscar': // Procedimiento para cargar todos los datos de los clientes
+        if (!isset($_POST["texto"])) {
+            echo json_encode(["error" => "Client ID not specified."]);
+            exit();
+        }
+        $texto = intval($_POST["texto"]);
+        $datos = array();
+        $datos = $clientes->buscar($texto);
+        while ($row = mysqli_fetch_assoc($datos)) {
+            $todos[] = $row;
+        }
+        echo json_encode($todos);
+        break;
     case 'todos': // Procedimiento para cargar todos los datos de los clientes
-        $datos = array(); 
-        $datos = $clientes->todos(); 
+        $datos = array();
+        $datos = $clientes->todos();
         while ($row = mysqli_fetch_assoc($datos)) {
             $todos[] = $row;
         }
@@ -28,7 +40,7 @@ switch ($_GET["op"]) {
 
     case 'uno': // Procedimiento para obtener un registro de la base de datos
         if (!isset($_POST["idClientes"])) {
-            echo json_encode(["error" => "Client ID no especificado."]);
+            echo json_encode(["error" => "Client ID not specified."]);
             exit();
         }
         $idClientes = intval($_POST["idClientes"]);
@@ -40,7 +52,7 @@ switch ($_GET["op"]) {
 
     case 'insertar': // Procedimiento para insertar un cliente en la base de datos
         if (!isset($_POST["Nombres"]) || !isset($_POST["Direccion"]) || !isset($_POST["Telefono"]) || !isset($_POST["Cedula"]) || !isset($_POST["Correo"])) {
-            echo json_encode(["error" => "Sin parametros requeridos."]);
+            echo json_encode(["error" => "Missing required parameters."]);
             exit();
         }
 
@@ -57,7 +69,7 @@ switch ($_GET["op"]) {
 
     case 'actualizar': // Procedimiento para actualizar un cliente en la base de datos
         if (!isset($_POST["idClientes"]) || !isset($_POST["Nombres"]) || !isset($_POST["Direccion"]) || !isset($_POST["Telefono"]) || !isset($_POST["Cedula"]) || !isset($_POST["Correo"])) {
-            echo json_encode(["error" => "Sin parametros requeridos."]);
+            echo json_encode(["error" => "Missing required parameters."]);
             exit();
         }
 
@@ -75,7 +87,7 @@ switch ($_GET["op"]) {
 
     case 'eliminar': // Procedimiento para eliminar un cliente en la base de datos
         if (!isset($_POST["idClientes"])) {
-            echo json_encode(["error" => "Client ID no especificado."]);
+            echo json_encode(["error" => "Client ID not specified."]);
             exit();
         }
         $idClientes = intval($_POST["idClientes"]);
@@ -85,6 +97,6 @@ switch ($_GET["op"]) {
         break;
 
     default:
-        echo json_encode(["error" => "Operacion Invalida."]);
+        echo json_encode(["error" => "Invalid operation."]);
         break;
 }

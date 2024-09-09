@@ -28,7 +28,7 @@ switch ($_GET["op"]) {
 
     case 'uno': // Procedimiento para obtener una factura por ID
         if (!isset($_POST["idFactura"])) {
-            echo json_encode(["error" => "Factura ID no encontrado."]);
+            echo json_encode(["error" => "Factura ID not specified."]);
             exit();
         }
         $idFactura = intval($_POST["idFactura"]);
@@ -40,7 +40,7 @@ switch ($_GET["op"]) {
 
     case 'insertar': // Procedimiento para insertar una nueva factura
         if (!isset($_POST["Fecha"]) || !isset($_POST["Sub_total"]) || !isset($_POST["Sub_total_iva"]) || !isset($_POST["Valor_IVA"]) || !isset($_POST["Clientes_idClientes"])) {
-            echo json_encode(["error" => "Sin parametros requeridos."]);
+            echo json_encode(["error" => "Missing required parameters."]);
             exit();
         }
 
@@ -57,7 +57,7 @@ switch ($_GET["op"]) {
 
     case 'actualizar': // Procedimiento para actualizar una factura existente
         if (!isset($_POST["idFactura"]) || !isset($_POST["Fecha"]) || !isset($_POST["Sub_total"]) || !isset($_POST["Sub_total_iva"]) || !isset($_POST["Valor_IVA"]) || !isset($_POST["Clientes_idClientes"])) {
-            echo json_encode(["error" => "Sin parametros requeridos."]);
+            echo json_encode(["error" => "Missing required parameters."]);
             exit();
         }
 
@@ -75,7 +75,7 @@ switch ($_GET["op"]) {
 
     case 'eliminar': // Procedimiento para eliminar una factura
         if (!isset($_POST["idFactura"])) {
-            echo json_encode(["error" => "Factura ID no encontrado."]);
+            echo json_encode(["error" => "Factura ID not specified."]);
             exit();
         }
         $idFactura = intval($_POST["idFactura"]);
@@ -85,6 +85,6 @@ switch ($_GET["op"]) {
         break;
 
     default:
-        echo json_encode(["error" => "Operacion incorrecta."]);
+        echo json_encode(["error" => "Invalid operation."]);
         break;
 }
