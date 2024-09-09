@@ -15,7 +15,7 @@ class ClaseConectar
             die("Error al conectar con el servidor: " . $this->conexion->connect_error);
         }
         $this->db = $this->conexion;
-        if ($this->db == false) die("Error al conectar con la base de datos: " . $this->conexion->connect_error);
+        if ($this->db == false) die("Error al conectar con la BD: " . $this->conexion->connect_error);
 
         return $this->conexion;
     }
