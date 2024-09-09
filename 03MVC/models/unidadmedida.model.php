@@ -49,7 +49,6 @@ class UnidadDeMedida
             $con = new ClaseConectar();
             $con = $con->ProcedimientoParaConectar();
             $cadena = "UPDATE `unidad_medida` SET 
-                      
                        `Detalle`='$Descripcion',
                        `Tipo`='$Tipo'
                        WHERE `idUnidad_Medida` = $idUnidad";
